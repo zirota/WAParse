@@ -1,0 +1,22 @@
+{
+  "name": "waparse",
+  "version": "0.0.1",
+  "description": "Parses whatsapp messages into a table",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Whatsapp",
+    "Messages",
+    "Table"
+  ],
+  "author": "Hazzen Chua",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "WAParse",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Parse whatsapp messages into table",
+  "permissions": [
+    "declarativeContent"
+  ],
+  "background": {
+    "scripts": ["./js/background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_title": "WAParse",
+    "default_popup": "./views/popup.html"
+  }
+}
