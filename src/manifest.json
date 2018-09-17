@@ -4,7 +4,8 @@
   "manifest_version": 2,
   "description": "Parse whatsapp messages into table",
   "permissions": [
-    "declarativeContent"
+    "declarativeContent",
+    "tabs"
   ],
   "background": {
     "scripts": ["./js/background.js"],
