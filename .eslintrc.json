@@ -5,8 +5,15 @@
     "ecmaVersion": 2017
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true
   },
+  "plugins": [
+    "dollar-sign",
+    "jquery"
+  ],
   "globals": {
     "chrome": true
   }
