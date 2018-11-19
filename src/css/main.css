@@ -1,0 +1,55 @@
+body {
+  font-size: 1rem;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  text-align: left;
+}
+
+h1 {
+  margin: 10px;
+}
+
+#content {
+  flex-direction: column;
+  margin: 25 300 10 10;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid rgba(0,0,0,.06);
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+th, td {
+  border: 1px solid rgba(0,0,0,.06);
+  border-collapse: collapse;
+}
+
+.cell {
+  padding: 5px;
+}
+
+.message {
+  width: 30%;
+}
+
+.repliedmessage {
+  width: 30%;
+}
+
+.sender {
+  width: 10%;
+  text-align: center;
+}
+
+.datetime {
+  width: 10%;
+}
+
+.repliedsender {
+  width: 10%;
+  text-align: center;
+}
+

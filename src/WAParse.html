@@ -1,7 +1,20 @@
 <!DOCTYPE>
+<head>
+  <meta charset='utf-8'>
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+</head>
 <body>
-  <!-- TODO: Generate saved messages -->
-  <div><h1> Hello World </h1></div>
-  <div id="content"></div>
+  <div><h1> Saved Messages </h1></div>
+  <div id="content">
+    <table id="content-header">
+      <tr>
+        <th class="cell message"><b>Message</b></th>
+        <th class="cell repliedmessage"><b>Replied To</b></th>
+        <th class="cell repliedsender"><b>Replied Sender</b></th>
+        <th class="cell sender"><b>Sender</b></th>
+        <th class="cell datetime"><b>Timestamp</b></th>
+      </tr>
+    </table>
+  </div>
   <script src="./js/main.js"></script>
 <body>

@@ -1,24 +1,34 @@
 function draw(coordinates) {
-  const svg = document.querySelector('svg#picker');
-  let path = document.querySelector('svg#picker path');
-  const { left, top, right, bottom } = coordinates;
+  if (document.querySelector('svg#picker')) {
+    const svg = document.querySelector('svg#picker');
+    let path = document.querySelector('svg#picker path');
+    const { left, top, right, bottom } = coordinates;
 
-  if (!path) {
-    path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    svg.appendChild(path);
+    if (!path) {
+      path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      svg.appendChild(path);
+    }
+    path.setAttribute('stroke', '#db1313');
+    path.setAttribute('stroke-width', '2');
+    path.setAttribute('fill', '#ff000085');
+    path.setAttribute('d', `M${left} ${top} L${right} ${top} L${right} ${bottom} L${left} ${bottom} Z`);
   }
-  path.setAttribute('stroke', '#db1313');
-  path.setAttribute('stroke-width', '2');
-  path.setAttribute('fill', '#ff000085');
-  path.setAttribute('d', `M${left} ${top} L${right} ${top} L${right} ${bottom} L${left} ${bottom} Z`);
+}
+
+function exist(existingDetails, details) {
+  for (const current of existingDetails) {
+    if (current.message === details.message) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function updateChromeSync(details) {
-  // TODO: Send message to chrome sync storage
   chrome.storage.sync.get('WAParse', (current) => {
-    let existingDetails = !current ? [] : current.WAParse;
+    const existingDetails = JSON.stringify(current) === '{}' ? [] : current.WAParse;
+    if (!exist(existingDetails, details)) existingDetails.push(details);
     console.log('exisitingDetais', existingDetails);
-    existingDetails = existingDetails.concat(details);
     chrome.storage.sync.set({ WAParse: existingDetails }, () => {
       console.log(existingDetails);
     });
@@ -33,8 +43,9 @@ function saveMessage(element) {
   // TODO: Make this support emojis
   const repliedMsg = element.querySelector('.Y9G3K .quoted-mention')
     ? element.querySelector('.Y9G3K .quoted-mention').innerHTML : null;
-  const repliedSender = element.querySelector('._2a1Yw')
-    ? element.querySelector('._2a1Yw').innerHTML : null;
+  const repliedSender = !element.querySelector('._3sEgI')
+    ? null : element.querySelector('._2a1Yw')
+      ? element.querySelector('._2a1Yw').innerHTML : 'You';
 
   // Details of a message
   const details = {
@@ -80,15 +91,6 @@ function updateListener() {
   });
 }
 
-// TODO: Remove all listeners
-function removeListener(textboxes) {
-  textboxes.forEach((textbox) => {
-    textbox.removeEventListener('mouseover', saveMessage);
-    textbox.removeEventListener('click');
-    textbox.removeEventListener('mouseleave');
-  });
-}
-
 function onPicker() {
   // Links to create namespace elements
   const overlay = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -113,7 +115,6 @@ try {
         break;
       case ('off-picker'):
         offPicker();
-        removeListener(textboxes);
         break;
       case ('page-change'):
         textboxes.push(updateListener());
